@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include<sys/wait.h>
+int main(int argc, char *argv[])
+{
+    pid_t pid;
+    pid = fork();
+    if(pid < 0)
+    {
+        perror("Fork failed ");
+    }
+    if(pid == 0)
+    {
+        printf("\t Child process \n");
+        printf("I am a child with process id %d\n" , (int) getpid());
+       
+        int sum=0;
+        for(int i=1;i<=6;i++)
+        {
+            sum=sum+i;
+        }
+        printf("sum of first 6 numbers is : %d \n",sum);
+        exit(0);
+    }
+    printf(" I am parent process with id %d\n",(int) getpid());
+    int product=1;
+        for(int i=1;i<=6;i++)
+        {
+            product=product*i;
+        }
+        printf("product of first 6 numbers is : %d \n",product);
+    printf(" Parent Ending ....\n");
+    return 0;
+
+}
